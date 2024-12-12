@@ -39,8 +39,15 @@ const Home = async () => {
                         With Next.js 13 and above, you can fetch data inside server components (this
                         template uses Next 14.2.8, because I don&apos;t want sudden breaking changes
                         while doing my finals thank you very much). Below is a coffee fetched from{" "}
-                        <code>sampleapis.com</code>. The styling for the card it's presented in, as
-                        well as the text input and button from the left are provided by DaisyUI.
+                        <a
+                            target="_blank"
+                            href="https://sampleapis.com/api-list/coffee#google_vignette"
+                            rel="noopener noreferrer"
+                        >
+                            sampleapis.com
+                        </a>
+                        . The styling for the card it's presented in, as well as the text input and
+                        button from the left are provided by DaisyUI.
                     </p>
 
                     <div className="not-prose max-h-96 card card-side bg-base-200">
