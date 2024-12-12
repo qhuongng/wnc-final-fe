@@ -1,101 +1,122 @@
-import Image from "next/image";
+import Link from "next/link";
+import ClientComponent from "@/app/ClientComponent";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+const fetchCoffee = async () => {
+    const response = await fetch("https://api.sampleapis.com/coffee/hot");
+    const data = await response.json();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    return data[0];
+};
+
+const Home = async () => {
+    const coffee = await fetchCoffee();
+
+    return (
+        <div className="w-[calc(100vw-34px)] p-12 overflow-x-hidden">
+            <div className="flex justify-between items-start">
+                <h1>WNC Next.js Frontend Template 🎉</h1>
+
+                <button className="btn btn-accent">
+                    <Link className="no-underline font-bold" href="/example-route">
+                        Warp
+                    </Link>
+                </button>
+            </div>
+
+            <p>
+                This is a Next.js project template with{" "}
+                <b>TypeScript, TailwindCSS, DaisyUI, Redux and React Hook Form</b> all set up for
+                you. What you&apos;re currently seeing is the <b>Home</b> component, rendered by the{" "}
+                <code>page.tsx</code> file inside the <code>app</code> directory. Below is a small
+                demo that puts all the dependencies to work.
+            </p>
+
+            <div className="flex gap-8">
+                <ClientComponent />
+
+                <div className="flex flex-col">
+                    <p>
+                        With Next.js 13 and above, you can fetch data inside server components (this
+                        template uses Next 14.2.8, because I don&apos;t want sudden breaking changes
+                        while doing my finals thank you very much). Below is a coffee fetched from{" "}
+                        <code>sampleapis.com</code>. The styling for card it's presented in, as well
+                        as the text input and button from the left are provided by DaisyUI.
+                    </p>
+
+                    <div className="not-prose max-h-96 card card-side bg-base-200">
+                        <figure>
+                            <img className="max-w-24" src={coffee.image} alt={coffee.title}></img>
+                        </figure>
+                        <div className="card-body">
+                            <h2 className="card-title not-prose">{coffee.title}</h2>
+                            <p>{coffee.description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Helpful resources</h2>
+
+            <ul>
+                <li>
+                    For more info on routing (i.e. dynamic routes), loading and streaming, SSR
+                    patterns, etc., check out{" "}
+                    <a target="_blank" href="https://nextjs.org/docs" rel="noopener noreferrer">
+                        Next.js documentation
+                    </a>
+                    .
+                </li>
+
+                <li>
+                    For how to style things, install the{" "}
+                    <a
+                        target="_blank"
+                        href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss"
+                        rel="noopener noreferrer"
+                    >
+                        TailwindCSS Intellisense extension
+                    </a>{" "}
+                    (if you're using VSCode). Also check out{" "}
+                    <a
+                        target="_blank"
+                        href="https://daisyui.com/docs/use/"
+                        rel="noopener noreferrer"
+                    >
+                        DaisyUI
+                    </a>{" "}
+                    and{" "}
+                    <a
+                        target="_blank"
+                        href="https://tailwindcss.com/docs"
+                        rel="noopener noreferrer"
+                    >
+                        TailwindCSS documentation
+                    </a>
+                    .
+                </li>
+
+                <li>
+                    For state management, check out{" "}
+                    <a target="_blank" href="https://redux.js.org/usage/" rel="noopener noreferrer">
+                        Redux Toolkit documentation
+                    </a>
+                    .
+                </li>
+
+                <li>
+                    For form validation, check out{" "}
+                    <a
+                        target="_blank"
+                        href="https://www.react-hook-form.com/get-started/"
+                        rel="noopener noreferrer"
+                    >
+                        React Hook Form documentation
+                    </a>
+                    .
+                </li>
+            </ul>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
-}
+    );
+};
+
+export default Home;
