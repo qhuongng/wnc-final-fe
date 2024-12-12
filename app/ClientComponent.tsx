@@ -62,8 +62,8 @@ const ClientComponent = () => {
 
                 {errors.name && (
                     <p className="not-prose text-sm mt-4 text-red-600">
-                        This input is also registered to React Hook Form for validation! Type
-                        something first.
+                        This input is registered to React Hook Form for validation! Type something
+                        first.
                     </p>
                 )}
             </form>
